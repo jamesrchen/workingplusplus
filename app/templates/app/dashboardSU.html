@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/materialize.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+
+<div>
+    <h1 class="center-align">Welcome, {{ user.get_username }}</h1>
+    <h3 class="center-align">Here is today's report</h3>
+    <div style="margin-left: 20rem;margin-right:20rem;padding-top:5rem;">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Last Clock-In</th>
+                <th>Last Clock-Out</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for username,user in table.items %}
+            <tr>
+                <th>{{ username }}/{{ user.name }}</th>
+                <th>{{user.timeCard.timeIn}}</th>
+                <th>{{user.timeCard.timeOut}}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static '/materialize.min.js' %}"></script>

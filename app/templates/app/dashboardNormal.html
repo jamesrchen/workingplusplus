@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/materialize.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+
+<div>
+    <h1 class="center-align">Welcome, {{ user.get_username }}</h1>
+    {% if clockedIn %}
+        <h3 class="center-align">Clocked In</h3>
+        <form enctype="multipart/form-data" class="center-align" style="margin-top:5rem" action="{% url 'app:clockOut' %}" method="post">
+            {% csrf_token %}
+            <button class="btn waves-effect waves-light" type="submit" name="submit">Clock Out
+            </button>
+        </form>
+
+    {% else %}
+        <h3 class="center-align">You are not Clocked In, Code is {{code}}</h3>
+        <form enctype="multipart/form-data" class="center-align" style="margin-top:5rem" action="{% url 'app:clockIn' %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <button class="btn waves-effect waves-light" type="submit" name="submit">Clock In
+            </button>
+        </form>
+    {% endif %}
+
+</div>
+
+<script src="{% static '/materialize.min.js' %}"></script>
